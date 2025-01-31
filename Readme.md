@@ -57,4 +57,5 @@ For english language, the [`gte-modernbert-base`](https://huggingface.co/Alibaba
 
 ### Other
 
-This crate could be used as-is with other models, or easily adapted to others.
+This crate should be usable out-of-the box with other models, or easily adapted to other ones.
+Please report your own tests or requirements!
