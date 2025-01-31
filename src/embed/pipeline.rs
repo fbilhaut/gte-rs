@@ -6,12 +6,12 @@ use crate::tokenizer::Tokenizer;
 use crate::util::result::Result;
 
 /// Pipeline for text embedding
-pub struct TextEmbedingPipeline {
+pub struct TextEmbeddingPipeline {
     tokenizer: Tokenizer,
 }
 
 
-impl TextEmbedingPipeline {
+impl TextEmbeddingPipeline {
     pub fn new<P: AsRef<Path>>(tokenizer_path: P, params: &Parameters) -> Result<Self> {
         Ok(Self { 
             tokenizer: Tokenizer::new(tokenizer_path, params.max_length())?
@@ -20,7 +20,7 @@ impl TextEmbedingPipeline {
 }
 
 
-impl<'a> Pipeline<'a> for TextEmbedingPipeline {
+impl<'a> Pipeline<'a> for TextEmbeddingPipeline {
     type Input = super::input::TextInput;
     type Output = super::output::TextEmbeddings;
     type Context = ();

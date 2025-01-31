@@ -8,7 +8,7 @@ fn main() -> gte::util::result::Result<()> {
     const MODEL_PATH: &str = "models/gte-modernbert-base/onnx/model.onnx";
 
     let params = gte::params::Parameters::default();
-    let pipeline = gte::embed::pipeline::TextEmbedingPipeline::new(TOKENIZER_PATH, &params)?;
+    let pipeline = gte::embed::pipeline::TextEmbeddingPipeline::new(TOKENIZER_PATH, &params)?;
     let model = orp::model::Model::new(MODEL_PATH, orp::params::RuntimeParameters::default())?;
             
     let inputs = gte::embed::input::TextInput::from_str(&[

@@ -18,7 +18,7 @@ They are built with [`🧩 orp`](https://github.com/fbilhaut/orp) (which relies 
 
 ```rust
 let params = Parameters::default();
-let pipeline = TextEmbedingPipeline::new("models/gte-modernbert-base/tokenizer.json", &params)?;
+let pipeline = TextEmbeddingPipeline::new("models/gte-modernbert-base/tokenizer.json", &params)?;
 let model = Model::new("models/gte-modernbert-base/model.onnx", RuntimeParameters::default())?;
             
 let inputs = TextInput::from_str(&[
