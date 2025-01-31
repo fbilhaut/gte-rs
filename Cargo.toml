@@ -1,0 +1,31 @@
+[package]
+name = "gte-rs"
+version = "0.9.0"
+edition = "2021"
+authors = ["Frédérik Bilhaut <frederik.bilhaut@gmail.com>"]
+license = "Apache-2.0"
+keywords = ["nlp", "text-embeddings", "reranking"]
+readme = "./Readme.md"
+description = "Text embedding and re-ranking pipelines"
+homepage = "https://github.com/fbilhaut/gte-rs"
+repository = "https://github.com/fbilhaut/gte-rs"
+documentation = "https://docs.rs/fbilhaut/gte-rs"
+
+[lib]
+name = "gte"
+path = "src/lib.rs"
+
+[dependencies]
+ort = "=2.0.0-rc.9"
+orp = "0.9.1"
+composable = "0.9.0"
+tokenizers = "0.21.0"
+ndarray = "0.16.0"
+
+[[example]]
+name = "embed"
+path = "src/examples/embed.rs"
+
+[[example]]
+name = "rerank"
+path = "src/examples/rerank.rs"
