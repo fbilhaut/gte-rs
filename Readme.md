@@ -21,7 +21,7 @@ let params = Parameters::default();
 let pipeline = TextEmbedingPipeline::new("models/gte-modernbert-base/tokenizer.json", &params)?;
 let model = Model::new("models/gte-modernbert-base/model.onnx", RuntimeParameters::default())?;
             
-let inputs = gte::embed::input::TextInput::from_str(&[
+let inputs = TextInput::from_str(&[
     "text content", 
     "some more content",
     //...
@@ -37,7 +37,7 @@ let params = Parameters::default();
 let pipeline = RerankingPipeline::new("models/gte-modernbert-base/tokenizer.json", &params)?;
 let model = Model::new("models/gte-reranker-modernbert-base/model.onnx", RuntimeParameters::default())?;
 
-let inputs = gte::rerank::input::TextInput::from_str(&[
+let inputs = TextInput::from_str(&[
     ("one candidate", "query"),
     ("another candidate", "query"),
     //...
