@@ -4,7 +4,7 @@
 
 This crate provides simple pipelines that can be used out-of-the box to perform **text-embedding** and **re-ranking** using ONNX models.
 
-They are built with [🧩 `orp`](https://github.com/fbilhaut/orp) (which relies on the [🦀 `ort`](https://ort.pyke.io) runtime), and use [`🤗 tokenizers`](https://github.com/huggingface/tokenizers) for token encoding.
+They are built with [`🧩 orp`](https://github.com/fbilhaut/orp) (which relies on the [`🦀 ort`](https://ort.pyke.io) runtime), and use [`🤗 tokenizers`](https://github.com/huggingface/tokenizers) for token encoding.
 
 
 ## 🎓 Examples
