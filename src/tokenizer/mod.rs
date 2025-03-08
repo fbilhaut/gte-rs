@@ -39,7 +39,7 @@ impl Tokenizer {
     }
 
     fn to_i64(array: &[u32]) -> Vec<i64> {
-        array.iter().into_iter().map(|x| *x as i64).collect()
+        array.iter().map(|x| *x as i64).collect()
     }
 
 }

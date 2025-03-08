@@ -14,7 +14,11 @@ impl TextEmbeddings {
 
     pub fn len(&self) -> usize {
         self.embeddings.dim().0
-    }    
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.embeddings.is_empty()
+    }
 }
 
 
@@ -69,7 +73,7 @@ impl Composable<OutputTensors<'_>, TextEmbeddings> for EmbeddingsExtractor {
         match self.mode {
             ExtractorMode::Raw => {
                 // the raw output tensor is supposed to provide the actual embeddings by sequence
-                let embeddings = output_tensor.slice(ndarray::s![.., ..]);
+                let embeddings = output_tensor.into_dimensionality::<ndarray::Ix2>()?;
                 Ok(TextEmbeddings { embeddings: embeddings.into_owned() })
             },
             ExtractorMode::Token(index) => {

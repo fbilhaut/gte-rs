@@ -11,7 +11,7 @@ pub struct InputTensors<'a> {
 }
 
 
-impl<'a> TryFrom<EncodedInput> for InputTensors<'a> {
+impl TryFrom<EncodedInput> for InputTensors<'_> {
     type Error = crate::util::result::Error;
 
     fn try_from(input: EncodedInput) -> Result<Self> {

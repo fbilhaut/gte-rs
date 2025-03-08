@@ -15,7 +15,7 @@ impl TextInput {
     }
 }
 
-impl<'a> crate::commons::input::text::TextInput<'a> for TextInput {
+impl crate::commons::input::text::TextInput<'_> for TextInput {
     type InputType = String;
 
     fn into_encode_input(self) -> Vec<Self::InputType> {
