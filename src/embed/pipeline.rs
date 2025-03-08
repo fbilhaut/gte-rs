@@ -1,6 +1,6 @@
 use std::path::Path;
 use orp::pipeline::{Pipeline, PreProcessor, PostProcessor};
-use crate::embed::output::TextEmbeddings;
+use crate::embed::output::EmbeddingsExtractor;
 use crate::params::Parameters;
 use crate::tokenizer::Tokenizer;
 use crate::util::result::Result;
@@ -34,10 +34,10 @@ impl<'a> Pipeline<'a> for TextEmbeddingPipeline {
         ]
     }
 
-    fn post_processor(&self, _params: &Self::Parameters) -> impl PostProcessor<'a, Self::Output, Self::Context> {
+    fn post_processor(&self, params: &Self::Parameters) -> impl PostProcessor<'a, Self::Output, Self::Context> {
         composable::composed![
             crate::commons::output::tensors::OutputTensors::try_from,
-            TextEmbeddings::try_from
+            EmbeddingsExtractor::new(params.output_id(), params.mode())
         ]
     }
 }

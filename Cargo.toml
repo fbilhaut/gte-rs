@@ -1,6 +1,6 @@
 [package]
 name = "gte-rs"
-version = "0.9.0"
+version = "0.9.1-SNAPSHOT"
 edition = "2021"
 authors = ["Frédérik Bilhaut <frederik.bilhaut@gmail.com>"]
 license = "Apache-2.0"
@@ -29,3 +29,11 @@ path = "src/examples/embed.rs"
 [[example]]
 name = "rerank"
 path = "src/examples/rerank.rs"
+
+[[example]]
+name = "embed-mul-token"
+path = "src/examples/embed-mul-token.rs"
+
+[[example]]
+name = "embed-mul-sentence"
+path = "src/examples/embed-mul-sentence.rs"

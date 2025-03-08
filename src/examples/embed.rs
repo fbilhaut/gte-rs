@@ -3,6 +3,8 @@
 //! Reproduces the example from <https://huggingface.co/Alibaba-NLP/gte-modernbert-base>
 //! and checks for consistency of the results.
 
+mod util;
+
 fn main() -> gte::util::result::Result<()> {    
     const TOKENIZER_PATH: &str = "models/gte-modernbert-base/tokenizer.json";
     const MODEL_PATH: &str = "models/gte-modernbert-base/onnx/model.onnx";
@@ -22,20 +24,10 @@ fn main() -> gte::util::result::Result<()> {
     const EPSILON: f32 = 0.000001;
 
     let outputs = model.inference(inputs, &pipeline, &params)?;
-    let distances = distances_to_first(&outputs);
+    let distances = util::distances_to_first(&outputs);
 
     println!("Distances: {:?}", distances); 
     assert!(gte::util::test::is_close_to_a(&distances.view(), &EXPECTED_DISTANCES, EPSILON));
 
     Ok(())
-}
-
-
-fn distances_to_first(outputs: &gte::embed::output::TextEmbeddings) -> ndarray::Array1<f32> {
-    assert!(outputs.len() >= 2);
-    let first = outputs.embeddings(0);
-    outputs.embeddings.rows().into_iter()
-        .skip(1)
-        .map(|e| gte::util::math::cosine_similarity(&first, &e))
-        .collect()
 }
