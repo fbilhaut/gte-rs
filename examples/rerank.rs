@@ -2,7 +2,6 @@
 //! 
 //! Reproduces the example from <https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base>
 //! and checks for consistency of the results.
-
 fn main() -> gte::util::result::Result<()> {    
     const TOKENIZER_PATH: &str = "models/gte-modernbert-base/tokenizer.json";
     const MODEL_PATH: &str = "models/gte-reranker-modernbert-base/onnx/model.onnx";

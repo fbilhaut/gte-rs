@@ -15,3 +15,13 @@ pub fn is_close_to_a<T: NdFloat>(a1: &ArrayView1<T>, a2: &[T], epsilon: T) -> bo
     }
     true
 }
+
+/// For testing purposes: measures the distance between the first sequence and every subsequent one
+pub fn distances_to_first(outputs: &crate::embed::output::TextEmbeddings) -> ndarray::Array1<f32> {
+    assert!(outputs.len() >= 2);
+    let first = outputs.embeddings(0);
+    outputs.embeddings.rows().into_iter()
+        .skip(1)
+        .map(|e| crate::util::math::cosine_similarity(&first, &e))
+        .collect()
+}

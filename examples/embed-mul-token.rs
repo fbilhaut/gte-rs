@@ -1,7 +1,5 @@
 //! Complete example for text embedding using `gte-multilingual` (first token)
 
-mod util;
-
 fn main() -> gte::util::result::Result<()> {    
     const TOKENIZER_PATH: &str = "models/gte-multilingual-base/tokenizer.json";
     const MODEL_PATH: &str = "models/gte-multilingual-base/onnx/model.onnx";
@@ -19,7 +17,7 @@ fn main() -> gte::util::result::Result<()> {
     ]);
 
     let outputs = model.inference(inputs, &pipeline, &params)?;
-    let distances = util::distances_to_first(&outputs);
+    let distances = gte::util::test::distances_to_first(&outputs);
 
     println!("Distances: {:?}", distances);     
 
