@@ -11,7 +11,7 @@ They are built with [`🧩 orp`](https://github.com/fbilhaut/orp) (which relies 
 
 ```toml
 [dependencies]
-"gte-rs" = "0.9.0"
+"gte-rs" = "0.9.1"
 ```
 
 **Embedding:**
