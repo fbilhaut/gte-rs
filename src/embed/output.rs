@@ -24,6 +24,7 @@ impl TextEmbeddings {
 
 /// Output tensor identifier
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct OutputId(String);
 impl Default for OutputId { fn default() -> Self { OutputId("last_hidden_state".into()) } }
 impl From<String> for OutputId { fn from(s: String) -> Self { OutputId(s) } }
@@ -34,7 +35,8 @@ impl std::fmt::Display for OutputId { fn fmt(&self, f: &mut std::fmt::Formatter)
 
 
 /// Defines the way embeddings are extracted from the output tensor
-#[derive(Clone, Copy)]
+#[derive(Debug, Clone, Copy)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum ExtractorMode {
     /// The tensor is expected to provide directly usable embeddings for each sequence
     Raw,

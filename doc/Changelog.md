@@ -7,7 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [0.9.2] - UNRELEASED
 
-* ...
+### Added
+
+* Make parameters optionally serializable/deserializable (if `serde` feature is enabled).
 
 
 ## [0.9.1] - 2025-03-09

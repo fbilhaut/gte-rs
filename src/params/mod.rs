@@ -5,6 +5,7 @@ use crate::embed::output::{ExtractorMode, OutputId};
 /// Parameters
 /// 
 /// Prefer using `default()` and set individual parameters as needed.
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Parameters {
     max_length: Option<usize>,
     sigmoid: bool,
