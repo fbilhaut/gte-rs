@@ -12,6 +12,7 @@ They are built with [`🧩 orp`](https://github.com/fbilhaut/orp) (which relies 
 ```toml
 [dependencies]
 "gte-rs" = "0.9.1"
+"orp" = "0.9.2"
 ```
 
 **Embedding:**
@@ -46,7 +47,7 @@ let inputs = TextInput::from_str(&[
 let similarities = model.inference(inputs, &pipeline, &params)?;
 ```
 
-Please refer the the source code in `src/examples` for complete examples.
+Please refer the the source code in `examples` for complete examples.
 
 
 ## 🧬 Models
