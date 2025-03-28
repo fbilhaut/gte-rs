@@ -19,8 +19,8 @@ They are built with [`🧩 orp`](https://github.com/fbilhaut/orp) (which relies 
 
 ```rust
 let params = Parameters::default();
-let pipeline = TextEmbeddingPipeline::new("models/gte-modernbert-base/tokenizer.json", &params)?;
-let model = Model::new("models/gte-modernbert-base/model.onnx", RuntimeParameters::default())?;
+let pipeline = TextEmbeddingPipeline::new("gte-modernbert-base/tokenizer.json", &params)?;
+let model = Model::new("gte-modernbert-base/model.onnx", RuntimeParameters::default())?;
             
 let inputs = TextInput::from_str(&[
     "text content", 
@@ -35,8 +35,8 @@ let embeddings = model.inference(inputs, &pipeline, &params)?;
 
 ```rust
 let params = Parameters::default();
-let pipeline = RerankingPipeline::new("models/gte-modernbert-base/tokenizer.json", &params)?;
-let model = Model::new("models/gte-reranker-modernbert-base/model.onnx", RuntimeParameters::default())?;
+let pipeline = RerankingPipeline::new("gte-reranker-modernbert-base/tokenizer.json", &params)?;
+let model = Model::new("gte-reranker-modernbert-base/model.onnx", RuntimeParameters::default())?;
 
 let inputs = TextInput::from_str(&[
     ("one candidate", "query"),
@@ -60,3 +60,11 @@ For english language, the [`gte-modernbert-base`](https://huggingface.co/Alibaba
 
 This crate should be usable out-of-the box with other models, or easily adapted to other ones.
 Please report your own tests or requirements!
+
+
+## 👉 Related
+
+This project follows the same principles as the ones below. Refer to their documentation for more details:
+
+* 🌿 [gline-rs](https://github.com/fbilhaut/gline-rs): inference engine for GLiNER models
+* 🏷️ [gliclass-rs](https://github.com/fbilhaut/gliclass-rs): inference engine for GLiClass models
