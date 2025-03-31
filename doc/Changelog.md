@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 * Add a parameter to pass the token type ids to the models that require it.
 * Make the pipelines expose the expected input/output tensors so `orp` can check if they are consistent with the actual model.
+* Add an example with `gte-multilingual-reranker-base`.
 * Make parameters optionally serializable/deserializable (if `serde` feature is enabled).
 
 ### Changed
