@@ -5,6 +5,7 @@ use crate::tokenizer::Tokenizer;
 pub struct EncodedInput {
     pub input_ids: ndarray::Array2<i64>,
     pub attn_masks: ndarray::Array2<i64>,
+    pub type_ids: Option<ndarray::Array2<i64>>,
 }
 
 
@@ -23,10 +24,11 @@ impl<'a> TextInputEncoder<'a> {
 impl<'a, T> Composable<T, EncodedInput> for TextInputEncoder<'a> where T: super::text::TextInput<'a> {
     fn apply(&self, input: T) -> composable::Result<EncodedInput> {
         let input = input.into_encode_input();
-        let (input_ids, attn_masks) = self.tokenizer.tokenize(input)?;
+        let tokenized = self.tokenizer.tokenize(input)?;
         Ok(EncodedInput{
-            input_ids,
-            attn_masks,
+            input_ids: tokenized.input_ids,
+            attn_masks: tokenized.attn_masks,
+            type_ids: tokenized.type_ids,
         })
     }
 }

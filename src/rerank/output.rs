@@ -21,4 +21,8 @@ impl TextSimilarities {
         // job's done
         Ok(Self {  scores })
     }
+
+    pub fn output_tensor() -> &'static str {
+        TENSOR_LOGITS
+    }
 }

@@ -9,11 +9,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+* Add a parameter to pass the token type ids to the models that require it.
+* Make the pipelines expose the expected input/output tensors so `orp` can check if they are consistent with the actual model.
 * Make parameters optionally serializable/deserializable (if `serde` feature is enabled).
 
 ### Changed
 
-* Switch to `orp` version `0.9.2`.
+* Switch to `orp` version `0.9.3-SNAPSHOT`.
 
 
 ## [0.9.1] - 2025-03-09

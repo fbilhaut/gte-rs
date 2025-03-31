@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 use std::path::Path;
 use orp::pipeline::{Pipeline, PreProcessor, PostProcessor};
 use crate::params::Parameters;
@@ -7,13 +8,15 @@ use crate::util::result::Result;
 /// Pipeline for re-ranking
 pub struct RerankingPipeline {
     tokenizer: Tokenizer,
+    expected_inputs: HashSet<&'static str>,
 }
 
 
 impl RerankingPipeline {
     pub fn new<P: AsRef<Path>>(tokenizer_path: P, params: &Parameters) -> Result<Self> {
         Ok(Self { 
-            tokenizer: Tokenizer::new(tokenizer_path, params.max_length())?
+            tokenizer: Tokenizer::new(tokenizer_path, params.max_length(), params.token_types())?,
+            expected_inputs: crate::commons::input::tensors::InputTensors::input_tensors(params.token_types()).into_iter().collect(),
         })
     }
 }
@@ -38,5 +41,13 @@ impl<'a> Pipeline<'a> for RerankingPipeline {
             crate::commons::output::tensors::OutputTensors::try_from,
             |tensors| super::output::TextSimilarities::try_from(tensors, params.sigmoid())
         ]
+    }
+
+    fn expected_inputs(&self, _params: &Self::Parameters) -> Option<impl Iterator<Item = &str>> {
+        Some(self.expected_inputs.iter().copied())
+    }
+
+    fn expected_outputs(&self, _params: &Self::Parameters) -> Option<impl Iterator<Item = &str>> {
+        Some(std::iter::once(super::output::TextSimilarities::output_tensor()))
     }
 }

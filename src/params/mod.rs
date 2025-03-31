@@ -9,6 +9,7 @@ use crate::embed::output::{ExtractorMode, OutputId};
 pub struct Parameters {
     max_length: Option<usize>,
     sigmoid: bool,
+    token_types: bool,
     output_id: OutputId,
     mode: ExtractorMode,
 }
@@ -35,6 +36,17 @@ impl Parameters {
     /// Apply sigmoid (for re-reanking)
     pub fn sigmoid(&self) -> bool {
         self.sigmoid
+    }
+
+    /// Does the model need `token_type_ids`
+    pub fn with_token_types(mut self, b: bool) -> Self {
+        self.token_types = b;
+        self
+    }
+
+    /// Does the model need `token_type_ids`
+    pub fn token_types(&self) -> bool {
+        self.token_types
     }
 
     /// Set output tensor identifier (eg. `last_hidden_state`)
@@ -67,6 +79,7 @@ impl Default for Parameters {
         Self { 
             max_length: None,
             sigmoid: false,
+            token_types: false,
             output_id: OutputId::default(),
             mode: ExtractorMode::default(),
         }
