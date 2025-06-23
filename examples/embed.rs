@@ -18,13 +18,12 @@ fn main() -> gte::util::result::Result<()> {
         "sorting algorithms",
     ]);
 
-    const EXPECTED_DISTANCES: [f32; 3] = [0.4289073944091797, 0.7130911254882812, 0.33664554595947266];
-    const EPSILON: f32 = 0.000001;
-
     let outputs = model.inference(inputs, &pipeline, &params)?;
     let distances = gte::util::test::distances_to_first(&outputs);
-
     println!("Distances: {:?}", distances); 
+
+    const EXPECTED_DISTANCES: [f32; 3] = [0.4289073944091797, 0.7130911254882812, 0.33664554595947266];
+    const EPSILON: f32 = 0.000001;
     assert!(gte::util::test::is_close_to_a(&distances.view(), &EXPECTED_DISTANCES, EPSILON));
 
     Ok(())
