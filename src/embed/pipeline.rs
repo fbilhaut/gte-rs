@@ -18,8 +18,8 @@ pub struct TextEmbeddingPipeline {
 impl<'a> TextEmbeddingPipeline {
     pub fn new<P: AsRef<Path>>(tokenizer_path: P, params: &Parameters) -> Result<Self> {
         Ok(Self { 
-            tokenizer: Tokenizer::new(tokenizer_path, params.max_length(),params.token_types())?,
-            expected_inputs: crate::commons::input::tensors::InputTensors::input_tensors(params.token_types()).into_iter().collect(),
+            tokenizer: Tokenizer::new(tokenizer_path, params.max_length(),params.token_types(), params.positions())?,
+            expected_inputs: crate::commons::input::tensors::InputTensors::input_tensors(params.token_types(), params.positions()).into_iter().collect(),
             expected_output: params.output_id().to_string(),
         })
     }
@@ -43,7 +43,7 @@ impl<'a> Pipeline<'a> for TextEmbeddingPipeline {
     fn post_processor(&self, params: &Self::Parameters) -> impl PostProcessor<'a, Self::Output, Self::Context> {
         composable::composed![
             crate::commons::output::tensors::OutputTensors::try_from,
-            EmbeddingsExtractor::new(params.output_id(), params.mode())
+            EmbeddingsExtractor::new(params.output_id(), params.mode(), params.precision())
         ]
     }
 

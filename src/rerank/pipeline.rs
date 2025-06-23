@@ -15,8 +15,8 @@ pub struct RerankingPipeline {
 impl RerankingPipeline {
     pub fn new<P: AsRef<Path>>(tokenizer_path: P, params: &Parameters) -> Result<Self> {
         Ok(Self { 
-            tokenizer: Tokenizer::new(tokenizer_path, params.max_length(), params.token_types())?,
-            expected_inputs: crate::commons::input::tensors::InputTensors::input_tensors(params.token_types()).into_iter().collect(),
+            tokenizer: Tokenizer::new(tokenizer_path, params.max_length(), params.token_types(), params.positions())?,
+            expected_inputs: crate::commons::input::tensors::InputTensors::input_tensors(params.token_types(), params.positions()).into_iter().collect(),
         })
     }
 }

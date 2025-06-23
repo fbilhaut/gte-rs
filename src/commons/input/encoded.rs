@@ -6,6 +6,7 @@ pub struct EncodedInput {
     pub input_ids: ndarray::Array2<i64>,
     pub attn_masks: ndarray::Array2<i64>,
     pub type_ids: Option<ndarray::Array2<i64>>,
+    pub position_ids: Option<ndarray::Array2<i64>>,
 }
 
 
@@ -29,6 +30,7 @@ impl<'a, T> Composable<T, EncodedInput> for TextInputEncoder<'a> where T: super:
             input_ids: tokenized.input_ids,
             attn_masks: tokenized.attn_masks,
             type_ids: tokenized.type_ids,
+            position_ids: tokenized.position_ids,
         })
     }
 }

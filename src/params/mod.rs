@@ -1,6 +1,6 @@
 //! Parameters for embedding or re-ranking
 
-use crate::embed::output::{ExtractorMode, OutputId};
+use crate::embed::output::{ExtractorMode, OutputId, Precision};
 
 /// Parameters
 /// 
@@ -10,8 +10,10 @@ pub struct Parameters {
     max_length: Option<usize>,
     sigmoid: bool,
     token_types: bool,
+    positions: bool,
     output_id: OutputId,
     mode: ExtractorMode,
+    precision: Precision,
 }
 
 impl Parameters {
@@ -49,6 +51,18 @@ impl Parameters {
         self.token_types
     }
 
+
+    /// Does the model need `position_ids`
+    pub fn with_positions(mut self, b: bool) -> Self {
+        self.positions = b;
+        self
+    }
+
+    /// Does the model need `position_ids`
+    pub fn positions(&self) -> bool {
+        self.positions
+    }
+
     /// Set output tensor identifier (eg. `last_hidden_state`)
     pub fn with_output_id(mut self, id: &str) -> Self {
         self.output_id = id.into();
@@ -70,6 +84,18 @@ impl Parameters {
     pub fn mode(&self) -> ExtractorMode {
         self.mode
     }
+
+    /// Set the embeddings precision (as for the model)
+    pub fn with_precision(mut self, precision: Precision) -> Self {
+        self.precision = precision;
+        self
+    }
+
+    /// Embeddings precision (as for the model)
+    pub fn precision(&self) -> Precision {
+        self.precision
+    }
+    
     
 }
 
@@ -80,8 +106,10 @@ impl Default for Parameters {
             max_length: None,
             sigmoid: false,
             token_types: false,
+            positions: false,
             output_id: OutputId::default(),
             mode: ExtractorMode::default(),
+            precision: Precision::default(),
         }
     }
 }

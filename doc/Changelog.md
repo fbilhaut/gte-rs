@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 
 * Add a parameter to pass the token type ids to the models that require it.
+* Add a parameter to pass the position ids to the models that require it.
+* Add a parameter to set embedding precision of the model (16 or 32)
 * Make the pipelines expose the expected input/output tensors so `orp` can check if they are consistent with the actual model.
 * Add an example with `gte-multilingual-reranker-base`.
 * Make parameters optionally serializable/deserializable (if `serde` feature is enabled).

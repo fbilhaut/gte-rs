@@ -48,19 +48,31 @@ impl Default for ExtractorMode {
     fn default() -> Self { ExtractorMode::Token(0) }
 }
 
+/// Defines the expected embeddings precision from the output tensor
+#[derive(Clone, Copy)]
+pub enum Precision {
+    F16, F32
+}
+
+impl Default for Precision {
+    fn default() -> Self { Precision::F32 }
+}
+
 
 /// Composable that extracts the embeddings from the output tensors, according to the specified output id and extraction mode
 #[derive(Default)]
 pub struct EmbeddingsExtractor {
     output_id: OutputId,
-    mode: ExtractorMode,    
+    mode: ExtractorMode,
+    precision: Precision,
 }
 
 impl EmbeddingsExtractor {
-    pub fn new(output_id: &OutputId, mode: ExtractorMode) -> Self {
+    pub fn new(output_id: &OutputId, mode: ExtractorMode, precision: Precision) -> Self {
         Self { 
             output_id: output_id.clone(), 
             mode,
+            precision,
         }
     }
 }
@@ -69,7 +81,12 @@ impl Composable<OutputTensors<'_>, TextEmbeddings> for EmbeddingsExtractor {
     fn apply(&self, output_tensors: OutputTensors) -> composable::Result<TextEmbeddings> {
         // extract the tensor from the ORT output
         let output_tensor = output_tensors.outputs.get(&self.output_id).ok_or_else(|| format!("tensor not found in model output: {}", self.output_id))?;
-        let output_tensor = output_tensor.try_extract_tensor::<f32>()?;
+        /*let output_tensor = output_tensor.try_extract_tensor::<half::f16>()?;
+        let output_tensor = output_tensor.mapv(|v| f32::from(v));*/
+        let output_tensor = match self.precision {
+            Precision::F32 => ndarray::CowArray::from(output_tensor.try_extract_tensor::<f32>()?),
+            Precision::F16 => ndarray::CowArray::from(output_tensor.try_extract_tensor::<half::f16>()?.mapv(|v| f32::from(v))),
+        };
         
         // extract the actual embeddings depending on the desired mode
         match self.mode {
