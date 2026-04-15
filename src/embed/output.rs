@@ -8,7 +8,7 @@ pub struct TextEmbeddings {
 }
 
 impl TextEmbeddings {
-    pub fn embeddings(&self, index: usize) -> ndarray::ArrayView1<f32> {
+    pub fn embeddings(&self, index: usize) -> ndarray::ArrayView1<'_, f32> {
         self.embeddings.slice(ndarray::s![index, ..])
     }
 
@@ -50,6 +50,7 @@ impl Default for ExtractorMode {
 
 /// Defines the expected embeddings precision from the output tensor
 #[derive(Clone, Copy)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum Precision {
     F16, F32
 }
