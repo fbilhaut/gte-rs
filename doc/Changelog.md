@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Changed
 
 * Switch to `orp` version `0.9.3-SNAPSHOT`.
+* Pin the `rc.9` version of `ort-sys` (`ort` was not doing so before `rc.10`, which would break builds of crates that depend on earlier versions, see [pykeio/ort#399](https://github.com/pykeio/ort/issues/399)).
 
 
 ## [0.9.1] - 2025-03-09

@@ -17,6 +17,7 @@ path = "src/lib.rs"
 
 [dependencies]
 ort = "=2.0.0-rc.9"
+ort-sys = { version = "=2.0.0-rc.9", default-features = false } # see https://github.com/pykeio/ort/issues/399
 orp = { git = "https://github.com/fbilhaut/orp", branch = "main" }
 composable = "0.9.0"
 tokenizers = "0.21.0"
