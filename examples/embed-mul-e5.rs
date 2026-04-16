@@ -2,14 +2,6 @@
 //! 
 //! Reproduces the example from <https://huggingface.co/intfloat/multilingual-e5-base>
 
-/*
-'query: how much protein should a female eat',
-    'query: 南瓜的家常做法',
-    "",
-    ""
-]
-*/
-
 
 fn main() -> gte::util::result::Result<()> {        
     const TOKENIZER_PATH: &str = "models/multilingual-e5-base/tokenizer.json";
