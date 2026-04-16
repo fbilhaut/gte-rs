@@ -25,3 +25,8 @@ pub fn distances_to_first(outputs: &crate::embed::output::TextEmbeddings) -> nda
         .map(|e| crate::util::math::cosine_similarity(&first, &e))
         .collect()
 }
+
+pub fn distance(outputs: &crate::embed::output::TextEmbeddings, from: usize, to: usize) -> f32 {
+    assert!(outputs.len() > from && outputs.len() > to);
+    crate::util::math::cosine_similarity(&outputs.embeddings(from), &outputs.embeddings(to))
+}
