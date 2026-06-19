@@ -9,7 +9,7 @@ readme = "./Readme.md"
 description = "Text embedding and re-ranking pipelines"
 homepage = "https://github.com/fbilhaut/gte-rs"
 repository = "https://github.com/fbilhaut/gte-rs"
-documentation = "https://docs.rs/fbilhaut/gte-rs"
+documentation = "https://docs.rs/gte-rs"
 
 [lib]
 name = "gte"
