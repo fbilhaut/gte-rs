@@ -1,3 +1,5 @@
 /target
 Cargo.lock
+models
+.DS_Store
 
